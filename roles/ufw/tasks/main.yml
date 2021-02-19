@@ -1,0 +1,8 @@
+---
+#
+
+- name: ""
+  ufw:
+    state: enable
+    policy: allow
+  

@@ -3,44 +3,13 @@
 
 - hosts: dev
   vars_files:
-    - vars/dev_users.secret
+    # Подключаем файлы с переменными
+    - ./vars/dev_users.secret
+    - ./vars/ssh_params.yml
   become: yes
   roles:
-    - create-users
-
-  tasks:
-    - name: Install package vim
-      apt:
-        name: vim
-        state: present
-
-    - name: Install package iotop
-      apt:
-        name: iotop
-        state: present
-
-    - name: Install package tcpdump
-      apt:
-        name: tcpdump
-        state: present
-
-    - name: Setup alternate SSH port
-      lineinfile:
-        dest: "/etc/ssh/sshd_config"
-        regexp: "^Port"
-        line: "Port 2222"
-      notify:
-      - Restart ssh
-
-    - name: Change PasswordAuthentication to no
-      lineinfile:
-        path: /etc/ssh/sshd_config
-        regexp: '^#PasswordAuthentication yes'
-        line: 'PasswordAuthentication no'
-        backrefs: yes
-      notify:
-      - Restart ssh
-
-  handlers:
-    - name: Restart ssh
-      service: name=ssh state=restarted
+#    - create-users
+#    - sshd-config
+#    - install-packages
+    - redis
+#    - ufw
