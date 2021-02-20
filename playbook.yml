@@ -12,11 +12,11 @@
   # Решил все разнести по ролям, так удобнее читать =)
   # Что не нужно просто закомментить
   roles:
-    # - install-packages
-    # - docker-install
+    - install-packages
+    - docker-install
     - check-ip
     - docker-redis
-    # - create-users
-    # - sshd-config
+    - create-users
+    - sshd-config
     # - redis
     # - ufw

@@ -1,0 +1,15 @@
+# pip-fix.yml
+- name: pip fix
+  hosts: dev
+  become: true
+
+  tasks:
+    - name: install python-is-python3
+      apt: name=python-is-python3 update_cache=yes state=present
+    - name: creating alias
+      shell: echo alias pip=pip3 >> ~/.bashrc
+
+    - name: test and upgrade pip
+      pip: name=pip state=latest
+      tags:
+        - packages

@@ -3,15 +3,7 @@
 
 - name: "Устанавливаем необходимые пакеты для Docker"
   apt: name={{ item }} state=latest update_cache=yes
-  loop: [ 'apt-transport-https',
-            'ca-certificates',
-            'curl',
-            'software-properties-common',
-            'python',
-            'python-pip',
-            'python-docker',
-            'virtualenv',
-            'python-setuptools']
+  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
 
 - name: "Добавляем Docker GPG apt Key"
   apt_key:
@@ -29,4 +21,3 @@
 - name: "Устанавливаем Docker Module для Python"
   pip:
     name: docker
-    executable: pip3
