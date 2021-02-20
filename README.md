@@ -8,7 +8,8 @@
 3) `inv.txt` добавить свои хосты
 4) `ansible.cfg` изменить пользовтеля
 5) `.vaultpass` создать свой, внутри plaintext пароль
-6) `dev_users.secret` создать на основе примера `dev_users.secret.example`
+6) `dev_users.secret` создать на основе примера `dev_users.secret.example`, где ssh-key необходимо сгенерировать `mkpasswd --method=SHA-512` и вставить в соответствующее поле
+7) 
 
 В корневой папке запускаем
 `ansible-playbook playbook.yml -kK`
