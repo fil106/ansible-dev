@@ -2,5 +2,5 @@
 #local ansible_host=localhost
 #node1 ansible_host=192.168.27.68
 #loc ansible_host=localhost ansible_pass=vagrant
-node2 ansible_host=192.168.88.26
+node2 ansible_host=12.12.12.2
 node3 ansible_host=192.168.88.27

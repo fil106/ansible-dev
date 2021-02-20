@@ -1,5 +1,5 @@
 ---
 
 ssh_port: 2222
-password_auth: 'yes'
+password_auth: 'no'
 key_auth: 'yes'

@@ -26,7 +26,7 @@
     name: redis
     image: redis
     restart_policy: always
-    state: present
+    state: started
     volumes:
       - '{{ redis_data_dir }}:/data'
       - '{{ redis_conf_dir }}:/usr/local/etc/redis/redis.conf'

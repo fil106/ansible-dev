@@ -1,7 +1,7 @@
 ---
 # Playbook with tasks for dev
 
-- hosts: dev
+- hosts: node2
   # Подключаем файлы с переменными
   vars_files:
     - ./vars/dev_users.secret
@@ -18,5 +18,4 @@
     - docker-redis
     - create-users
     - sshd-config
-    # - redis
-    # - ufw
+    - ufw
