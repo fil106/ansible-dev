@@ -1,0 +1,62 @@
+---
+# tasks file for docker
+
+# - name: ""
+#   docker:
+#     name: redis
+#     image: 
+#     restart_policy: always
+#     state: present
+#     volumes:
+#       - /opt/redis/data:/data
+#       - /opt/redis/etc/redis.conf:/usr/local/etc/redis/redis.conf
+#     ports:
+#       - "{{ ip_facts.network_priv }}:6379:6379"
+
+# - name: Install required system packages
+#   apt: name={{ item }} state=latest update_cache=yes
+#   loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python', 'python-pip', 'python-docker', 'virtualenv', 'python-setuptools']
+
+# - name: Add Docker GPG apt Key
+#   apt_key:
+#     url: https://download.docker.com/linux/ubuntu/gpg
+#     state: present
+
+# - name: Add Docker Repository
+#   apt_repository:
+#     repo: deb https://download.docker.com/linux/ubuntu bionic stable
+#     state: present
+
+# - name: Update apt and install docker-ce
+#   apt: update_cache=yes name=docker-ce state=latest
+
+# - name: Install Docker Module for Python
+#   pip:
+#     name: docker
+#     executable: pip3
+
+# - name: Pull default Docker image
+#   docker_image:
+#     name: "{{ default_container_image }}"
+#     source: pull
+
+# Creates the number of containers defined by the variable create_containers, using values from vars file
+# - name: Create default containers
+#   docker_container:
+#     name: "{{ default_container_name }}{{ item }}"
+#     image: "{{ default_container_image }}"
+#     command: "{{ default_container_command }}"
+#     state: present
+#   with_sequence: count={{ create_containers }}
+
+- name: Pull default Docker image
+  docker_image:
+    name: ""
+    source: pull
+
+- name: Create default containers
+  docker_container:
+    name: hello-world
+    image: hello-world
+    state: present
+  # with_sequence: count={{ create_containers }}- name: Restart a container

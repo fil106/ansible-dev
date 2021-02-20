@@ -1,3 +1,4 @@
 [dev]
-node1 ansible_host=192.168.88.26
+#local ansible_host=localhost
+node1 ansible_host=192.168.27.68
 #192.168.88.27

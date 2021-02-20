@@ -1,6 +1,10 @@
 ---
 # tasks file for install-packages
 
+- name: "Обновляем кэш apt update"
+  apt:
+    update_cache: yes
+
 - name: "Установка пакета vim"
   apt:
     name: vim

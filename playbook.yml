@@ -1,15 +1,21 @@
 ---
-# Playbook with tasks fo dev
+# Playbook with tasks for dev
 
 - hosts: dev
+  # Подключаем файлы с переменными
   vars_files:
-    # Подключаем файлы с переменными
     - ./vars/dev_users.secret
     - ./vars/ssh_params.yml
+    - ./vars/redis_params.yml
+  # Даём рут права
   become: yes
+  # Решил все раазнести по ролям, так удобнее читать =)
+  # Что не нужно просто закомментить
   roles:
-#    - create-users
-#    - sshd-config
-#    - install-packages
-    - redis
-#    - ufw
+    # - create-users
+    # - sshd-config
+    # - install-packages
+    # - check-ip
+    - docker-install
+    # - redis
+    # - ufw

@@ -1,0 +1,9 @@
+---
+# tasks file for check-ip
+
+- name: "Получаем из ansible_host ip->interface"
+  get_ip_facts: ip={{ hostvars[inventory_hostname]['ansible_host'] }}
+  register: ip_facts
+- name: "Выводим ip_facts"
+  debug: 
+    msg: '{{ ip_facts }}'

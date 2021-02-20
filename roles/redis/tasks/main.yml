@@ -1,26 +1,23 @@
 ---
 # tasks file for redis
 
-#- name: "Установка redis-server"
-#  apt:
-#    name: redis-server
-#    state: present
+- name: "Установка redis-server"
+  apt:
+    name: redis-server
+    state: present
 
-#- name: "Запуск сервиса redis-server"
-#  service:
-#    name: redis-server 
-#    state: started
-#    enabled: yes
+- name: "Запуск сервиса redis-server"
+  service:
+    name: redis-server 
+    state: started
+    enabled: yes
 
-#- name: "Создаём конфиг для redis-server"
-#  template:
-#    src: redis.conf.j2
-#    dest: /etc/redis/redis.conf
-#    dest: redis.conf
-#    owner: root
-#    group: root
-#    mode: 0644
-#  notify: Redis restart
-
-- name: "123"
-  debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
+- name: "Создаём конфиг для redis-server"
+  template:
+    src: redis.conf.j2
+#   dest: /etc/redis/redis.conf
+    dest: redis.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Redis restart
