@@ -7,7 +7,8 @@
 2) `playbook.yml` раскоментировать необходимые `roles`
 3) `inv.txt` добавить свои хосты
 4) `ansible.cfg` изменить пользовтеля
-5) `.vaultpass` создать свой
+5) `.vaultpass` создать свой, внутри plaintext пароль
+6) `dev_users.secret` создать на основе примера `dev_users.secret.example`
 
 В корневой папке запускаем
 `ansible-playbook playbook.yml -kK`
