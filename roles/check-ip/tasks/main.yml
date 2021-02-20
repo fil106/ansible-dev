@@ -1,9 +1,11 @@
 ---
 # tasks file for check-ip
 
-- name: "Получаем из ansible_host ip->interface"
-  get_ip_facts: ip={{ hostvars[inventory_hostname]['ansible_host'] }}
-  register: ip_facts
-- name: "Выводим ip_facts"
-  debug: 
-    msg: '{{ ip_facts }}'
+- name: "Смотрим не совпадение ansible_all_ipv4_addresses с ansible_host"
+  set_fact: private_ip={{ item }}
+  loop: "{{ ansible_all_ipv4_addresses }}"
+  when: item != ansible_host
+
+- name: "Что не совпало то и есть - серый интерфейс"
+  debug:
+    msg: "{{ private_ip }}"

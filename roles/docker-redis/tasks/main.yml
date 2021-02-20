@@ -1,0 +1,34 @@
+---
+# tasks file for docker-redis
+
+- name: "Создаём {{ redis_data_dir }}"
+  file:
+    path: '{{ redis_data_dir }}'
+    state: directory
+
+- name: "Создаём {{ redis_conf_dir }}"
+  file:
+    path: '{{ redis_conf_dir }}'
+    state: directory
+
+- name: "Создаём конфиг для redis-server и кладём в {{ redis_conf_dir }}/redis.conf"
+  template:
+    src: redis.conf.j2
+    dest: '{{ redis_conf_dir }}/redis.conf'
+
+- name: "Получаем docker image - redis"
+  docker_image:
+    name: redis
+    source: pull
+
+- name: "Создаём контейнер redis"
+  docker_container:
+    name: redis
+    image: redis
+    restart_policy: always
+    state: present
+    volumes:
+      - '{{ redis_data_dir }}':/data
+      - '{{ redis_conf_path }}':/usr/local/etc/redis/redis.conf
+    ports:
+      - "{{ private_ip | default('127.0.0.1') }}:{{ redis_port | default('6379') }}:{{ redis_port | default('6379') }}"

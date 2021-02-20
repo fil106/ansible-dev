@@ -1,4 +1,6 @@
 [dev]
 #local ansible_host=localhost
-node1 ansible_host=192.168.27.68
-#192.168.88.27
+#node1 ansible_host=192.168.27.68
+#loc ansible_host=localhost ansible_pass=vagrant
+node1 ansible_host=192.168.88.26 ansible_pass=vagrant
+node2 ansible_host=192.168.88.27 ansible_pass=vagrant

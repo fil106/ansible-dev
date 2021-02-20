@@ -1,4 +1,5 @@
 ---
 
-#ssh_port: 2220
-#password_auth: 'yes'
+ssh_port: 2222
+password_auth: 'yes'
+key_auth: 'yes'
