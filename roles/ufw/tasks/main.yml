@@ -1,8 +1,26 @@
 ---
 #
 
-- name: ""
-  ufw:
-    state: enable
-    policy: allow
-  
+- name: "Настраиваем firewall ufw"
+  iptables:
+    chain: INPUT
+    jump: drop
+  iptables:
+    chain: OUTPUT
+    jump: ACCEPT
+  - iptables:
+    chain: INPUT
+    destination: '{{ private_ip }}'
+    protocol: tcp
+    destination_port: '{{ ssh_port }}'
+    ctstate: NEW
+    syn: match
+    jump: ACCEPT
+  - iptables:
+    chain: INPUT
+    destination: '{{ private_ip }}'
+    protocol: tcp
+    destination_port: '{{ redis_port }}'
+    ctstate: NEW
+    syn: match
+    jump: ACCEPT
