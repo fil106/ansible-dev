@@ -29,10 +29,15 @@
 * ssh-key - генерим ssh-key под нужным пользователем или под своим но копируем в /home/<имя пользователя>/.ssh. Генерим при помощи `ssh-keygen`. И вставляем необходимый ключ в данное поле.
 * password - генерим пароль `mkpasswd --method=SHA-512`, чтоб не светить пароль. Можно и без шифрования.
 * Остальные параметры можно смотреть тут - https://github.com/ryandaniels/ansible-role-create-users
-* Можно добавлять несколько пользователей, для этого просто по правилам yaml добавляем ещё один элемент через - соблюдая отступы.
+* Можно добавлять несколько пользователей, для этого просто по правилам yaml добавляем ещё один элемент через "-" соблюдая отступы.
 
-В корневой папке запускаем
-`ansible-playbook playbook.yml -kK`
+В корневой папке запускаем:
+1) Если не хотим светить пароли и создавать файл `.vaultpass` и создавать переменную `ansible_sudo_pass` в ansible.cfg то: `ansible-playbook playbook.yml -kK`, где
+  ```
+  -k, --ask-pass - ask for connection password
+  -K, --ask-become-pass - ask for privilege escalation password
+  ```
+2) Если создали `.vaultpass` и переменную `ansible_sudo_pass`, то: `ansible-playbook playbook.yml`
 
 
 ### Roles
