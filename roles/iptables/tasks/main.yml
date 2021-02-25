@@ -1,26 +1,30 @@
 ---
 # tasks file for iptables
 
-- name: "Настраиваем iptables"
+- name: "Iptables - разрешаем ssh на сером ip"
+  iptables:
+      chain: INPUT
+      protocol: tcp
+      destination: '{{ private_ip }}'
+      destination_port: '{{ ssh_port }}'
+      jump: ACCEPT
+
+- name: "Iptables - разрешаем tcp/{{ redis_port }} на сером ip"
   iptables:
     chain: INPUT
-    jump: drop
-  iptables:
-    chain: OUTPUT
-    jump: ACCEPT
-  iptables:
-    chain: INPUT
-    destination: '{{ private_ip }}'
     protocol: tcp
-    destination_port: '{{ ssh_port }}'
-    ctstate: NEW
-    syn: match
-    jump: ACCEPT
-  iptables:
-    chain: INPUT
     destination: '{{ private_ip }}'
-    protocol: tcp
     destination_port: '{{ redis_port }}'
-    ctstate: NEW
-    syn: match
     jump: ACCEPT
+
+- name: "Iptables - разрешаем ICMP на белом ip"
+  iptables:
+      chain: INPUT
+      protocol: icmp
+      destination: '{{ ansible_host }}'
+      jump: ACCEPT
+
+- name: "Iptables - запрещаем входящий на ветке INPUT"
+  iptables:
+    chain: INPUT
+    jump: DROP
