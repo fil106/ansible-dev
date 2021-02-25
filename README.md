@@ -50,4 +50,4 @@
 5) `docker-install:` Ставим docker
 6) `docker-redis:` Запускаем контейнер с redis и нужными параметрами
 7) `redis:` Запускаем redis в докере
-8) `ufw:` Настраиваем firewall
+8) `iptables:` Настраиваем firewall

@@ -1,14 +1,14 @@
 ---
-#
+# tasks file for iptables
 
-- name: "Настраиваем firewall ufw"
+- name: "Настраиваем iptables"
   iptables:
     chain: INPUT
     jump: drop
   iptables:
     chain: OUTPUT
     jump: ACCEPT
-  - iptables:
+  iptables:
     chain: INPUT
     destination: '{{ private_ip }}'
     protocol: tcp
@@ -16,7 +16,7 @@
     ctstate: NEW
     syn: match
     jump: ACCEPT
-  - iptables:
+  iptables:
     chain: INPUT
     destination: '{{ private_ip }}'
     protocol: tcp
