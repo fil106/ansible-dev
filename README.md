@@ -14,25 +14,32 @@
 
 ### Тестовый стенд
 
-При помощи `Vagrant` устанавливал 2 виртуалки Ubuntu 20.04, 1 - Master-ansible, 2 - Для тестов. `Vagrantfile` - в репе есть.
-На виртуалке при старте 3 сетевухи, первую `nat` надо отключить + серая сеть через сетевуху на ПК + белая сеть через bridge intnet
+1) При помощи `Vagrant` устанавливал 2 виртуалки Ubuntu 20.04, 1 - Master-ansible, 2 - Для тестов. `Vagrantfile` - в репе есть. На виртуалке при старте 3 сетевухи, первую `nat` надо отключить + серая сеть через сетевуху на ПК + белая сеть через bridge intnet.
+2) На Master-ansible установить необходимые пакеты 
+```bash
+sudo apt install ansible sshpass -y
+```
+3) Получить репозиторий
+```bash
+git clone https://github.com/fil106/ansible-dev.git ansible
+```
 
 ### Start
 
 Для запуска сценария необходимо
 1) `vars/` переменные проверить/изменить, при необходимости добавляем сюда свои переменные. После в `templates` используем
-2) `playbook.yml` раскоментировать необходимые `roles`
+2) `playbook.yml` раскомментировать необходимые `roles`
 3) `inv.txt` добавить свои хосты
-4) `ansible.cfg` изменить пользовтеля
+4) `ansible.cfg` изменить пользовтеля (в данном случае пользователь vagrant т.к. виртуалки поднимаем через vagrant)
 5) `.vaultpass` создать свой, внутри plaintext пароль
 6) `dev_users.secret` создать на основе примера `dev_users.secret.example`, где 
-* ssh-key - генерим ssh-key под нужным пользователем или под своим но копируем в /home/<имя пользователя>/.ssh. Генерим при помощи `ssh-keygen`. И вставляем необходимый ключ в данное поле.
+* ssh-key - генерим ssh-key под нужным пользователем или под своим но копируем в /home/<имя пользователя>/.ssh. Генерируем при помощи `ssh-keygen`. И вставляем необходимый ключ в данное поле.
 * password - генерим пароль `mkpasswd --method=SHA-512`, чтоб не светить пароль. Можно и без шифрования.
 * Остальные параметры можно смотреть тут - https://github.com/ryandaniels/ansible-role-create-users
 * Можно добавлять несколько пользователей, для этого просто по правилам yaml добавляем ещё один элемент через "-" соблюдая отступы.
 
 В корневой папке запускаем:
-1) Если не хотим светить пароли и создавать файл `.vaultpass` и создавать переменную `ansible_sudo_pass` в ansible.cfg то: `ansible-playbook playbook.yml -kK`, где
+1) Если не хотим светить пароли и создавать файл `.vaultpass` и создавать переменную `ansible_sudo_pass` в `ansible.cfg` то: `ansible-playbook playbook.yml -kK`, где
   ```
   -k, --ask-pass - ask for connection password
   -K, --ask-become-pass - ask for privilege escalation password
