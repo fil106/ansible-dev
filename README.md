@@ -17,8 +17,11 @@
 1) При помощи `Vagrant` устанавливал 2 виртуалки Ubuntu 20.04, 1 - Master-ansible, 2 - Для тестов. `Vagrantfile` - в репе есть. На виртуалке при старте 3 сетевухи, первую `nat` надо отключить + серая сеть через сетевуху на ПК + белая сеть через bridge intnet.
 2) На Master-ansible установить необходимые пакеты 
 ```bash
-sudo apt install ansible sshpass -y
+sudo apt install python3-pip -y
+pip3 install ansible
 ```
+Перезапускаем сессию `source ~/.bashrc`
+
 3) Получить репозиторий
 ```bash
 git clone https://github.com/fil106/ansible-dev.git ansible
